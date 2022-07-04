@@ -3,6 +3,7 @@ import Layout from '../Layout';
 import { Link } from 'react-router-dom';
 import { showError, showSuccess, showLoading } from '../../utils/messages';
 import { getCategories, createProduct } from '../../api/apiAdmin';
+import { userInfo } from '../../utils/auth';
 
 const CreateProduct = () => {
     const [values, setValues] = useState({
@@ -52,11 +53,52 @@ const CreateProduct = () => {
     }, [])
 
     const handleChange = (e) => {
-
+        const value = e.target.name === 'photo' ? e.target.files[0] : e.target.value;
+        formData.set(e.target.name, value);
+        setValues({
+            ...values,
+            [e.target.name]: value,
+            error: false,
+            success: false,
+        })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setValues({
+            ...values,
+            error: false,
+            loading: true,
+            disabled: true,
+            success: false
+        })
+        const { token } = userInfo();
+        createProduct(token, formData)
+            .then(response => {
+                setValues({
+                    ...values,
+                    name: '',
+                    description: '',
+                    price: '',
+                    category: '',
+                    quantity: '',
+                    loading: false,
+                    disabled: false,
+                    success: true,
+                    error: false
+                })
+            })
+            .catch(error => {
+                let errMsg = "Something went wrong!";
+                if (error.response) errMsg = error.response.data;
+                setValues({
+                    ...values,
+                    error: errMsg,
+                    loading: false,
+                    success: false,
+                    disabled: false
+                })
+            })
 
     }
 
