@@ -1,5 +1,5 @@
 import { Link, withRouter } from 'react-router-dom';
-import { singout, isAuthenticated } from '../utils/auth';
+import { singout, isAuthenticated, userInfo } from '../utils/auth';
 
 const isActive = (history, path) => {
     if (history.location.pathname === path) {
@@ -27,7 +27,7 @@ const Menu = ({ history }) => {
 
                 {isAuthenticated() && (<>
                     <li className="nav-item">
-                        <Link className="nav-link" style={isActive(history, '/dashboard')} to="/dashboard">Dashboard</Link>
+                        <Link className="nav-link" style={isActive(history, `${userInfo().role}/dashboard`)} to={`${userInfo().role}/dashboard`}>Dashboard</Link>
                     </li>
                     <li className="nav-item">
                         <span className="nav-link" style={{ cursor: 'pointer', color: 'grey' }} onClick={() => {
