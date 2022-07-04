@@ -15,7 +15,7 @@ export const isAuthenticated = () => {
             return true;
         } else {
             localStorage.removeItem('jwt');
-            return false
+            return false;
         }
     } else return false;
 }
