@@ -9,3 +9,11 @@ export const addToCart = (token, cartItem) => {
         }
     })
 }
+
+export const getCartItems = (token) => {
+    return axios.get(`${API}/cart`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    })
+}
