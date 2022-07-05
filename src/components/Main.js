@@ -10,6 +10,8 @@ import AdminDashboard from './admin/AdminDashboard';
 import CreateCategory from './admin/CreateCategory';
 import CreateProduct from './admin/CreateProduct';
 import Cart from './order/Cart';
+import ShippingAddress from './order/ShippingAddress';
+import Checkout from './order/Checkout';
 
 const Main = () => {
     return (
@@ -24,6 +26,12 @@ const Main = () => {
                 </PrivateRoute>
                 <PrivateRoute exact path="/cart">
                     <Cart />
+                </PrivateRoute>
+                <PrivateRoute exact path="/shipping">
+                    <ShippingAddress />
+                </PrivateRoute>
+                <PrivateRoute exact path="/checkout">
+                    <Checkout />
                 </PrivateRoute>
                 <AdminRoute exact path="/admin/dashboard">
                     <AdminDashboard />
