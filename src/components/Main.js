@@ -12,6 +12,7 @@ import CreateProduct from './admin/CreateProduct';
 import Cart from './order/Cart';
 import ShippingAddress from './order/ShippingAddress';
 import Checkout from './order/Checkout';
+import Payment from './order/Payment';
 
 const Main = () => {
     return (
@@ -29,6 +30,9 @@ const Main = () => {
                 </PrivateRoute>
                 <PrivateRoute exact path="/shipping">
                     <ShippingAddress />
+                </PrivateRoute>
+                <PrivateRoute exact path="/payment">
+                    <Payment />
                 </PrivateRoute>
                 <PrivateRoute exact path="/checkout">
                     <Checkout />
